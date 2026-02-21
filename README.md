@@ -5,7 +5,7 @@
 One-command install (global):
 
 ```powershell
-npm install -g github:aGamingGod1234/net-quality-tray
+npm install -g https://codeload.github.com/aGamingGod1234/net-quality-tray/tar.gz/refs/heads/main
 ```
 
 Launch from anywhere:
