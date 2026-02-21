@@ -1,5 +1,29 @@
 # NQA (Network Quality Accesser) (Windows)
 
+## Install with npm
+
+One-command install (global):
+
+```powershell
+npm install -g github:aGamingGod1234/net-quality-tray
+```
+
+Launch from anywhere:
+
+```powershell
+nqa-tray
+```
+
+CLI commands:
+
+```powershell
+nqa-tray start
+nqa-tray install
+nqa-tray status
+nqa-tray open-folder
+nqa-tray remove-startup
+```
+
 `NQA.exe` is a native Windows tray app that monitors real network quality:
 - Download speed probe
 - Upload speed probe
