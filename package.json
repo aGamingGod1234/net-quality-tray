@@ -1,0 +1,38 @@
+{
+  "name": "net-quality-tray",
+  "version": "1.0.0",
+  "description": "Install and launch the NQA Windows network quality tray app.",
+  "license": "MIT",
+  "bin": {
+    "nqa-tray": "bin/nqa-tray.js"
+  },
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "files": [
+    "bin",
+    "scripts",
+    "NQA.exe",
+    "settings.json",
+    "NetworkQualityTray.ps1",
+    "Start-NetworkQualityTray.vbs",
+    "Build-NativeApp.ps1",
+    "NativeApp",
+    "assets",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "os": [
+    "win32"
+  ],
+  "keywords": [
+    "network",
+    "quality",
+    "tray",
+    "windows",
+    "latency",
+    "packet-loss"
+  ]
+}
