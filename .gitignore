@@ -1,8 +1,6 @@
 # Build outputs
 artifacts/
-bin/
 obj/
-NQA.exe
 Net Quality Accesser.exe
 
 # Temporary probe/test artifacts
