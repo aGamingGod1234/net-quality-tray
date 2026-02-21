@@ -1,0 +1,42 @@
+﻿{
+    "LatencyHosts":  [
+                         "1.1.1.1",
+                         "8.8.8.8",
+                         "9.9.9.9"
+                     ],
+    "LatencySamples":  6,
+    "LatencyTimeoutMs":  900,
+    "LatencyIntervalSec":  3,
+    "DownloadEndpoints":  [
+                              "https://speed.cloudflare.com/__down?bytes={bytes}",
+                              "https://speed.hetzner.de/100MB.bin",
+                              "https://proof.ovh.net/files/100Mb.dat"
+                          ],
+    "UploadEndpoints":  [
+                            "https://speed.cloudflare.com/__up",
+                            "https://postman-echo.com/post",
+                            "https://httpbin.org/post"
+                        ],
+    "DownloadSmallBytes":  4000000,
+    "DownloadFullBytes":  18000000,
+    "UploadSmallBytes":  3000000,
+    "UploadFullBytes":  12000000,
+    "DownloadProbeMaxMs":  8000,
+    "UploadProbeMaxMs":  11000,
+    "MaxEndpointBackoffSec":  180,
+    "HttpTimeoutSec":  20,
+    "SpeedIntervalGoodSec":  30,
+    "SpeedIntervalNormalSec":  18,
+    "SpeedIntervalPoorSec":  10,
+    "FullProbeIntervalSec":  240,
+    "HistorySize":  20,
+    "QualityHighMinScore":  70,
+    "QualityPoorMinScore":  45,
+    "QualityVeryPoorMinScore":  25,
+    "ColorHighHex":  "#2ECC71",
+    "ColorPoorHex":  "#F1C40F",
+    "ColorVeryPoorHex":  "#E67E22",
+    "ColorBadHex":  "#E74C3C",
+    "ColorOfflineHex":  "#951111",
+    "ColorPausedHex":  "#A0A0A0"
+}

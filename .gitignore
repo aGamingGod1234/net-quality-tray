@@ -1,0 +1,18 @@
+# Build outputs
+artifacts/
+bin/
+obj/
+NQA.exe
+Net Quality Accesser.exe
+
+# Temporary probe/test artifacts
+tmp_*.cs
+tmp_*.exe
+temp-settings-preview.png
+
+# Editor/system files
+.vscode/
+.idea/
+*.log
+Thumbs.db
+.DS_Store
