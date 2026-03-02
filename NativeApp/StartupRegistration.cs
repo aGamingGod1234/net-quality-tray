@@ -38,7 +38,7 @@ namespace NetQualitySentinel
 
                 if (enabled)
                 {
-                    string launch = "\"" + exePath + "\"";
+                    string launch = "\"" + exePath + "\" --autorun";
                     key.SetValue(valueName, launch, RegistryValueKind.String);
                 }
                 else

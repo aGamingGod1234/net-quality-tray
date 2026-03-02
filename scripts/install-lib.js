@@ -9,6 +9,7 @@ const localAppData = process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppDat
 const installDir = path.join(localAppData, 'NetQualityTray');
 const startupRegPath = 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run';
 const startupRegValue = 'NQA';
+const legacyStartupRegValue = 'NetQualityTray';
 
 function copyPath(source, destination) {
   const stat = fs.statSync(source);
@@ -21,7 +22,7 @@ function copyPath(source, destination) {
 }
 
 function setStartup(exePath) {
-  const quotedExe = `\"${exePath}\"`;
+  const quotedExe = `\"${exePath}\" --autorun`;
   const result = spawnSync('reg', ['add', startupRegPath, '/v', startupRegValue, '/t', 'REG_SZ', '/d', quotedExe, '/f'], {
     encoding: 'utf8',
   });
@@ -32,17 +33,22 @@ function setStartup(exePath) {
   }
 }
 
-function removeStartup() {
-  const result = spawnSync('reg', ['delete', startupRegPath, '/v', startupRegValue, '/f'], {
+function removeStartupValue(valueName) {
+  const result = spawnSync('reg', ['delete', startupRegPath, '/v', valueName, '/f'], {
     encoding: 'utf8',
   });
 
   if (result.status !== 0) {
     const text = `${result.stderr || ''}${result.stdout || ''}`.trim();
     if (text && !/unable to find|cannot find/i.test(text)) {
-      throw new Error(`Failed to remove startup registry value: ${text}`);
+      throw new Error(`Failed to remove startup registry value (${valueName}): ${text}`);
     }
   }
+}
+
+function removeStartup() {
+  removeStartupValue(startupRegValue);
+  removeStartupValue(legacyStartupRegValue);
 }
 
 function ensureInstalled(options = {}) {
@@ -84,6 +90,7 @@ function ensureInstalled(options = {}) {
 
   if (setStartupEntry) {
     setStartup(exePath);
+    removeStartupValue(legacyStartupRegValue);
   }
 
   return { installDir, exePath };

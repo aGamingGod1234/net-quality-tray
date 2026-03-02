@@ -14,17 +14,22 @@ namespace NetQualitySentinel
         {
             NativeUi.EnableDpiAwareness();
 
+            bool launchedFromStartup = HasArg(args, "--autorun");
+
             bool createdNew = false;
             using (Mutex mutex = new Mutex(true, MutexName, out createdNew))
             {
                 if (!createdNew)
                 {
-                    MessageBox.Show(
-                        AppName + " is already running.",
-                        AppName,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
+                    if (!launchedFromStartup)
+                    {
+                        MessageBox.Show(
+                            AppName + " is already running.",
+                            AppName,
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                        );
+                    }
                     return;
                 }
 
@@ -40,12 +45,12 @@ namespace NetQualitySentinel
                 {
                     for (int i = 0; i < args.Length; i++)
                     {
-                        if (string.Equals(args[i], "--open-graph", StringComparison.OrdinalIgnoreCase))
+                        if (HasArg(args[i], "--open-graph"))
                         {
                             openGraphOnStart = true;
                             continue;
                         }
-                        if (string.Equals(args[i], "--open-settings", StringComparison.OrdinalIgnoreCase))
+                        if (HasArg(args[i], "--open-settings"))
                         {
                             openSettingsOnStart = true;
                         }
@@ -54,6 +59,29 @@ namespace NetQualitySentinel
 
                 Application.Run(new SentinelAppContext(AppName, appDir, settingsPath, iconPath, openGraphOnStart, openSettingsOnStart));
             }
+        }
+
+        private static bool HasArg(string[] args, string expected)
+        {
+            if (args == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (HasArg(args[i], expected))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool HasArg(string value, string expected)
+        {
+            return string.Equals(value, expected, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
